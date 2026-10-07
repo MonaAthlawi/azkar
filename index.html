@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أذكاري | أذكار الصباح والمساء</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Amiri+Quran&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f8f6f0;
+  --bg2:#ffffff;
+  --card:#ffffff;
+  --ink:#1e2a32;
+  --muted:#6b7a86;
+  --gold:#b8860b;
+  --gold2:#d4af37;
+  --green:#0e6b5c;
+  --green2:#12967f;
+  --line:#e8e0cf;
+  --shadow:0 10px 30px rgba(14,107,92,.10);
+  --radius:20px;
+  --fs:18px;
+}
+[data-theme="dark"]{
+  --bg:#0f1a1c;
+  --bg2:#132326;
+  --card:#162a2e;
+  --ink:#eef5f1;
+  --muted:#9db3ad;
+  --gold:#d4af37;
+  --gold2:#f1d27a;
+  --green:#1fc09a;
+  --green2:#2dd4af;
+  --line:#23403a;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Tajawal",system-ui,"Segoe UI",Tahoma,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:var(--fs);
+  line-height:2;
+  transition:background .3s,color .3s;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;opacity:.06;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 10l10 20 22 3-16 15 4 22-20-11-20 11 4-22-16-15 22-3z' fill='none' stroke='%230e6b5c' stroke-width='1'/%3E%3C/svg%3E");
+}
+header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(12px);
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  max-width:1100px;margin:auto;padding:.8rem 1rem;
+  display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;
+}
+.logo{
+  display:flex;align-items:center;gap:.7rem;font-weight:900;
+}
+.logo-mark{
+  width:46px;height:46px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),#083f37);
+  color:#fff;display:grid;place-items:center;font-size:24px;
+  border:2px solid var(--gold2);
+  box-shadow:var(--shadow);
+}
+.logo small{display:block;font-weight:400;color:var(--muted);font-size:.75em;line-height:1.4}
+.controls{margin-inline-start:auto;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.btn{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:999px;padding:.35rem .9rem;cursor:pointer;font-family:inherit;
+  font-size:.9em;display:inline-flex;align-items:center;gap:.4rem;
+  transition:.2s;
+}
+.btn:hover{border-color:var(--gold);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,var(--green),#08463e);color:#fff;border:none}
+.hero{
+  max-width:1100px;margin:1.2rem auto;padding:0 1rem;position:relative;z-index:1;
+}
+.hero-card{
+  background:linear-gradient(135deg,#0e6b5c 0%,#083f37 55%,#0a2e2a 100%);
+  color:#fff;border-radius:28px;padding:2.2rem 1.6rem;text-align:center;
+  position:relative;overflow:hidden;border:1px solid #d4af3766;
+}
+.hero-card::after{
+  content:"۞";position:absolute;left:18px;top:6px;font-size:120px;opacity:.08;font-family:"Aref Ruqaa",serif;
+}
+.hero-card h1{font-family:"Aref Ruqaa",serif;margin:.2rem 0;font-size:clamp(1.9rem,4vw,3rem)}
+.hero-card p{opacity:.92;max-width:640px;margin:.5rem auto}
+.times{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.time-chip{background:#ffffff1e;border:1px solid #ffffff33;border-radius:999px;padding:.3rem 1rem;font-size:.9em}
+.progress-wrap{max-width:1100px;margin:1rem auto;padding:0 1rem;position:relative;z-index:1}
+.progress-box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem 1.2rem;box-shadow:var(--shadow);display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.bar{flex:1;min-width:200px;height:12px;background:color-mix(in srgb,var(--muted) 20%,transparent);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold2),var(--green2));transition:.4s}
+.tabs{max-width:1100px;margin:1rem auto;padding:0 1rem;display:flex;gap:.6rem;position:relative;z-index:1}
+.tab{flex:1;border:1px solid var(--line);background:var(--card);border-radius:16px;padding:.8rem;cursor:pointer;text-align:center;font-weight:800;font-family:inherit;color:var(--ink)}
+.tab.active{background:linear-gradient(135deg,var(--green),#083f37);color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+main{max-width:1100px;margin:auto;padding:0 1rem 3rem;position:relative;z-index:1}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.2rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.7rem;
+  transition:.25s;position:relative;overflow:hidden;
+}
+.card.done{border-color:var(--green2);background:linear-gradient(180deg,color-mix(in srgb,var(--green2) 10%,var(--card)),var(--card))}
+.card.done::before{content:"✓ تم";position:absolute;top:12px;left:12px;background:var(--green);color:#fff;font-size:.75em;border-radius:999px;padding:.1rem .7rem}
+.cat{font-size:.78em;color:var(--green);font-weight:700;background:color-mix(in srgb,var(--green2) 12%,transparent);display:inline-block;padding:.1rem .8rem;border-radius:999px;width:fit-content}
+.zekr{font-family:"Amiri Quran","Tajawal",serif;font-size:1.18em;line-height:2.15}
+.meta{font-size:.82em;color:var(--muted);background:color-mix(in srgb,var(--muted) 9%,transparent);border-radius:12px;padding:.6rem .8rem}
+.meta b{color:var(--gold)}
+.counter-row{display:flex;gap:.6rem;align-items:center;margin-top:auto}
+.count-badge{min-width:64px;text-align:center;border:1px dashed var(--gold);border-radius:12px;padding:.3rem .6rem;font-weight:900}
+.count-badge span{display:block;font-size:.7em;font-weight:400;color:var(--muted)}
+.sebha{flex:1;border:none;border-radius:14px;padding:.8rem;cursor:pointer;font-family:inherit;font-weight:900;font-size:1em;background:linear-gradient(135deg,var(--gold2),#a67c00);color:#221a00}
+.sebha:active{transform:scale(.97)}
+.reset{background:transparent;border:1px solid var(--line);border-radius:14px;padding:.8rem 1rem;cursor:pointer;color:var(--muted);font-family:inherit}
+footer{text-align:center;color:var(--muted);padding:2rem 1rem;font-size:.9em}
+.float{position:fixed;bottom:16px;left:16px;z-index:60;display:flex;gap:.5rem}
+@media(max-width:600px){.nav{justify-content:center}.controls{margin:0 auto}}
+</style>
+</head>
+<body data-theme="light">
+
+<header>
+  <div class="nav">
+    <div class="logo">
+      <div class="logo-mark">☪</div>
+      <div>أذكاري | حصن المسلم<small>أذكار الصباح والمساء الصحيحة بمصادرها</small></div>
+    </div>
+    <div class="controls">
+      <button class="btn" id="fontDec" title="تصغير الخط">أ−</button>
+      <button class="btn" id="fontReset" title="حجم افتراضي">حجم الخط: <b id="fsLabel">18</b></button>
+      <button class="btn" id="fontInc" title="تكبير الخط">أ+</button>
+      <button class="btn" id="themeBtn">🌙 غامق</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-card">
+    <div style="letter-spacing:.2em;font-size:.85em;color:#f1d27a">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <h1>أذكار الصباح والمساء</h1>
+    <p>جميع الأذكار صحيحة من القرآن والسنة مع تخريجها ومصدرها، بخط عربي واضح، مع مسبحة إلكترونية لكل ذكر، ووضع ليلي ونهاري، وتكبير وتصغير الخط.</p>
+    <div class="times">
+      <div class="time-chip">☀️ الصباح: من الفجر إلى الشروق (ويمتد للظهر)</div>
+      <div class="time-chip">🌙 المساء: من العصر إلى المغرب (ويمتد للفجر)</div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-box">
+    <div><b id="pct">0%</b> — <span id="statText">لم تبدأ بعد</span></div>
+    <div class="bar"><i id="bar"></i></div>
+    <button class="btn primary" id="resetAll">↺ إعادة الكل</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-tab="morning">☀️ أذكار الصباح</button>
+  <button class="tab" data-tab="evening">🌙 أذكار المساء</button>
+  <button class="tab" data-tab="all">📿 الكل</button>
+</div>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  تم مراجعة النصوص على <b>حصن المسلم</b> وكتب السنة • الخط المستخدم: <b>Tajawal (خط عربي حديث بنمط ثمانية الواضح)</b> + Amiri Quran للنصوص القرآنية<br>
+  قال ﷺ: «مثل الذي يذكر ربه والذي لا يذكر ربه مثل الحي والميت» — متفق عليه
+</footer>
+
+<div class="float">
+  <button class="btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ أعلى</button>
+</div>
+
+<script>
+const MORNING = [
+{c:"قرآن",t:"آية الكرسي",x:"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ ۝ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",n:1,s:"سورة البقرة: 255",f:"من قالها حين يصبح أُجير من الجن حتى يمسي. صحيح الترغيب 662"},
+{c:"قرآن",t:"سورة الإخلاص والمعوذتين",x:"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ ۝ (3 مرات) + قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ... + قُلْ أَعُوذُ بِرَبِّ النَّاسِ ...",n:3,s:"أبو داود 5082 ، الترمذي 3575 وحسّنه",f:"تكفيك من كل شيء"},
+{c:"دعاء",t:"أصبحنا وأصبح الملك لله",x:"أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",n:1,s:"صحيح مسلم 2723",f:"ذكر الصباح الجامع"},
+{c:"دعاء",t:"اللهم بك أصبحنا",x:"اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ",n:1,s:"سنن الترمذي 3391 - صحيح",f:"توحيد الاستعانة بالله"},
+{c:"استغفار",t:"سيد الاستغفار",x:"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",n:1,s:"صحيح البخاري 6306",f:"من قالها موقناً بها حين يصبح فمات من يومه دخل الجنة"},
+{c:"دعاء",t:"اللهم عافني في بدني",x:"اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَٰهَ إِلَّا أَنْتَ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَٰهَ إِلَّا أَنْتَ",n:3,s:"سنن أبي داود 5090 - حسن",f:"سؤال العافية"},
+{c:"دعاء",t:"اللهم إني أسألك العفو والعافية",x:"اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي",n:1,s:"سنن أبي داود 5074 وابن ماجه 3871 - صحيح",f:"لم يكن النبي ﷺ يدعهن حين يصبح وحين يمسي"},
+{c:"دعاء",t:"اللهم فاطر السماوات والأرض",x:"اللَّهُمَّ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ",n:1,s:"سنن الترمذي 3529 وأبو داود 5067 - صحيح",f:"وصّى بها النبي ﷺ أبا بكر أن يقولها صباحاً ومساءً"},
+{c:"إيمان",t:"رضيت بالله رباً",x:"رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا",n:3,s:"سنن أبي داود 5072 - صحيح",f:"من قالها حين يصبح وحين يمسي كان حقاً على الله أن يرضيه"},
+{c:"دعاء",t:"يا حي يا قيوم",x:"يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ",n:1,s:"المستدرك للحاكم وصححه ووافقه الذهبي، وحسّنه الألباني",f:"وصية النبي ﷺ لفاطمة"},
+{c:"إيمان",t:"أصبحنا على فطرة الإسلام",x:"أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ ﷺ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ",n:1,s:"مسند أحمد 15360 - صحيح",f:"تجديد التوحيد كل صباح"},
+{c:"تسبيح",t:"سبحان الله وبحمده",x:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",n:100,s:"صحيح مسلم 2692",f:"حُطَّت خطاياه وإن كانت مثل زبد البحر"},
+{c:"توحيد",t:"لا إله إلا الله وحده لا شريك له",x:"لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",n:100,s:"صحيح البخاري 3293 ومسلم 2691",f:"كانت له عدل عشر رقاب وكتبت له مائة حسنة ومحيت عنه مائة سيئة وكانت حرزاً من الشيطان. ومن قالها 10 مرات كان كمن أعتق أربعة أنفس"},
+{c:"تسبيح",t:"سبحان الله وبحمده عدد خلقه",x:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ",n:3,s:"صحيح مسلم 2726",f:"تزن ما قاله الصبح كله - تقال صباحاً"},
+{c:"دعاء",t:"اللهم إني أسألك علماً نافعاً",x:"اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا",n:1,s:"سنن ابن ماجه 925 - صحيح",f:"دعاء الصباح بعد الفجر"},
+{c:"استغفار",t:"أستغفر الله وأتوب إليه",x:"أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",n:100,s:"صحيح البخاري 6307 ومسلم 2702",f:"كان ﷺ يستغفر في اليوم مائة مرة"},
+{c:"تحصين",t:"بسم الله الذي لا يضر",x:"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",n:3,s:"أبو داود 5088 والترمذي 3388 - صحيح",f:"لم تضرّه فجأة بلاء حتى يصبح ومن قالها حين يصبح لم تضره حتى يمسي"},
+{c:"توكل",t:"حسبي الله لا إله إلا هو",x:"حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",n:7,s:"سنن أبي داود 5081",f:"كفاه الله ما أهمّه"},
+{c:"شكر",t:"اللهم ما أصبح بي من نعمة",x:"اللَّهُمَّ مَا أَصْبَحَ بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ",n:1,s:"أبو داود 5073 - حسن",f:"من قالها حين يصبح فقد أدّى شكر يومه"},
+{c:"شهادة",t:"اللهم إني أصبحت أشهدك",x:"اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ أَنَّكَ أَنْتَ اللَّهُ لَا إِلَٰهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ",n:4,s:"أبو داود 5078 - حسن",f:"من قالها أربعاً أعتقه الله من النار"},
+{c:"صلاة",t:"الصلاة على النبي ﷺ",x:"اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ",n:10,s:"الطبراني وحسّنه الألباني في صحيح الجامع 6577",f:"من صلى عليّ حين يصبح عشراً وحين يمسي عشراً أدركته شفاعتي"},
+];
+
+const EVENING = [
+{c:"قرآن",t:"آية الكرسي",x:"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ ۝ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",n:1,s:"سورة البقرة: 255",f:"من قالها حين يمسي أُجير من الجن حتى يصبح. صحيح الترغيب 662"},
+{c:"قرآن",t:"سورة الإخلاص والمعوذتين",x:"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ هُوَ اللَّهُ أَحَدٌ ... + قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ... + قُلْ أَعُوذُ بِرَبِّ النَّاسِ ...",n:3,s:"أبو داود 5082 ، الترمذي 3575 وحسّنه",f:"تكفيك من كل شيء"},
+{c:"قرآن",t:"خواتيم البقرة",x:"آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ... إلى آخر السورة",n:1,s:"صحيح البخاري 5009 ومسلم 808",f:"من قرأ بالآيتين من آخر سورة البقرة في ليلة كفتاه"},
+{c:"دعاء",t:"أمسينا وأمسى الملك لله",x:"أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",n:1,s:"صحيح مسلم 2723",f:"ذكر المساء الجامع"},
+{c:"دعاء",t:"اللهم بك أمسينا",x:"اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ",n:1,s:"سنن الترمذي 3391 - صحيح",f:"توحيد الاستعانة بالله"},
+{c:"استغفار",t:"سيد الاستغفار",x:"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",n:1,s:"صحيح البخاري 6306",f:"من قالها موقناً بها حين يمسي فمات من ليلته دخل الجنة"},
+{c:"دعاء",t:"اللهم عافني في بدني",x:"اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَٰهَ إِلَّا أَنْتَ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَٰهَ إِلَّا أَنْتَ",n:3,s:"سنن أبي داود 5090 - حسن",f:"سؤال العافية"},
+{c:"دعاء",t:"اللهم إني أسألك العفو والعافية",x:"اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي",n:1,s:"أبو داود 5074 - صحيح",f:"لم يكن ﷺ يدعهن حين يمسي وحين يصبح"},
+{c:"دعاء",t:"اللهم فاطر السماوات والأرض",x:"اللَّهُمَّ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ",n:1,s:"الترمذي 3529 - صحيح",f:"قلها إذا أصبحت وإذا أمسيت وإذا أخذت مضجعك"},
+{c:"إيمان",t:"رضيت بالله رباً",x:"رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا",n:3,s:"أبو داود 5072 - صحيح",f:"كان حقاً على الله أن يرضيه يوم القيامة"},
+{c:"دعاء",t:"يا حي يا قيوم",x:"يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ",n:1,s:"الحاكم وصححه ووافقه الذهبي",f:"وصية النبي ﷺ لفاطمة أن تقولها حين تصبح وحين تمسي"},
+{c:"إيمان",t:"أمسينا على فطرة الإسلام",x:"أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ ﷺ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ",n:1,s:"مسند أحمد 15360 - صحيح",f:"تجديد التوحيد كل مساء"},
+{c:"تحصين",t:"أعوذ بكلمات الله التامات",x:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",n:3,s:"صحيح مسلم 2709",f:"من قالها حين يمسي لم تضرّه حمّة تلك الليلة"},
+{c:"تحصين",t:"بسم الله الذي لا يضر",x:"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",n:3,s:"أبو داود 5088 والترمذي 3388 - صحيح",f:"لم تصبه فجأة بلاء حتى يصبح"},
+{c:"تسبيح",t:"سبحان الله وبحمده",x:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",n:100,s:"صحيح مسلم 2692",f:"حُطَّت خطاياه وإن كانت مثل زبد البحر"},
+{c:"توحيد",t:"لا إله إلا الله وحده لا شريك له",x:"لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",n:10,s:"البخاري 3293 ومسلم 2691 (100) ، والنسائي للعشر",f:"عشر مرات كان كمن أعتق أربعة أنفس، ومائة كانت حرزاً من الشيطان"},
+{c:"توكل",t:"حسبي الله لا إله إلا هو",x:"حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",n:7,s:"أبو داود 5081",f:"كفاه الله ما أهمّه من أمر الدنيا والآخرة"},
+{c:"شكر",t:"اللهم ما أمسى بي من نعمة",x:"اللَّهُمَّ مَا أَمْسَى بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ",n:1,s:"أبو داود 5073 - حسن",f:"من قالها حين يمسي فقد أدّى شكر ليلته"},
+{c:"شهادة",t:"اللهم إني أمسيت أشهدك",x:"اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ أَنَّكَ أَنْتَ اللَّهُ لَا إِلَٰهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ",n:4,s:"أبو داود 5078 - حسن",f:"من قالها أربعاً أعتقه الله من النار"},
+{c:"استغفار",t:"أستغفر الله وأتوب إليه",x:"أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",n:100,s:"البخاري 6307 ومسلم 2702",f:"إني لأستغفر الله في اليوم مائة مرة"},
+{c:"صلاة",t:"الصلاة على النبي ﷺ",x:"اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ",n:10,s:"الطبراني وحسّنه الألباني 6577",f:"تدركه شفاعة النبي ﷺ"},
+];
+
+let state = JSON.parse(localStorage.getItem('azkar-state')||'{}');
+let currentTab = localStorage.getItem('azkar-tab')||'morning';
+if(new Date().getHours()>=16 || new Date().getHours()<4){ currentTab = localStorage.getItem('azkar-tab')||'evening'; }
+
+function keyFor(item, section){ return section+':'+item.t; }
+function getLeft(item, section){
+  const k = keyFor(item,section);
+  if(state[k]===undefined) return item.n;
+  return state[k];
+}
+function render(){
+  const grid = document.getElementById('grid');
+  grid.innerHTML='';
+  let list=[];
+  if(currentTab==='morning') list = MORNING.map(o=>({...o,sec:'morning'}));
+  else if(currentTab==='evening') list = EVENING.map(o=>({...o,sec:'evening'}));
+  else list = [...MORNING.map(o=>({...o,sec:'morning',secName:'☀️ صباح'})),...EVENING.map(o=>({...o,sec:'evening',secName:'🌙 مساء'}))];
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===currentTab));
+  list.forEach((item,idx)=>{
+    const left = getLeft(item,item.sec);
+    const done = left===0;
+    const div=document.createElement('div');
+    div.className='card'+(done?' done':'');
+    div.innerHTML=`
+      <div class="cat">${item.secName||item.c} • ${item.sec==='morning'?'الصباح':'المساء'}</div>
+      <div style="font-weight:900;font-size:1.05em">${idx+1}. ${item.t}</div>
+      <div class="zekr">${item.x}</div>
+      <div class="meta">🔁 <b>التكرار: ${item.n}</b> • 📚 <b>المصدر:</b> ${item.s}<br>✨ <b>الفضل:</b> ${item.f}</div>
+      <div class="counter-row">
+        <div class="count-badge">${left}<span>متبقي</span></div>
+        <button class="sebha" ${done?'disabled style="opacity:.5"':''}>📿 سبّح (${left})</button>
+        <button class="reset" title="إعادة">↺</button>
+      </div>`;
+    const [badge,seb,rs]=[div.querySelector('.count-badge'),div.querySelector('.sebha'),div.querySelector('.reset')];
+    seb.onclick=()=>{
+      let l=getLeft(item,item.sec);
+      if(l>0){ l--; state[keyFor(item,item.sec)]=l; localStorage.setItem('azkar-state',JSON.stringify(state)); render(); 
+        if(l===0 && navigator.vibrate) navigator.vibrate(60);
+      }
+    };
+    rs.onclick=()=>{ state[keyFor(item,item.sec)]=item.n; localStorage.setItem('azkar-state',JSON.stringify(state)); render(); };
+    grid.appendChild(div);
+  });
+  // progress
+  const all=[...MORNING.map(o=>({o,sec:'morning'})),...EVENING.map(o=>({o,sec:'evening'}))];
+  let total=0,doneCount=0,doneCards=0;
+  all.forEach(({o,sec})=>{ total+=o.n; const l=getLeft(o,sec); doneCount+=(o.n-l); if(l===0) doneCards++; });
+  const pct = total?Math.round(doneCount/total*100):0;
+  document.getElementById('bar').style.width=pct+'%';
+  document.getElementById('pct').textContent=pct+'%';
+  document.getElementById('statText').textContent = pct===100?'ما شاء الله! أتممت الأذكار كاملة 🎉':`أنجزت ${doneCount} من ${total} • ${doneCards} ذكر مكتمل`;
+}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{currentTab=b.dataset.tab;localStorage.setItem('azkar-tab',currentTab);render();});
+document.getElementById('resetAll').onclick=()=>{ if(confirm('إعادة جميع العدادات؟')){state={};localStorage.setItem('azkar-state',JSON.stringify(state));render();}};
+
+// theme + font
+let fs = parseInt(localStorage.getItem('azkar-fs')||'18');
+let theme = localStorage.getItem('azkar-theme')||'light';
+function applyFs(){ document.documentElement.style.setProperty('--fs',fs+'px'); document.body.style.fontSize=fs+'px'; document.getElementById('fsLabel').textContent=fs; }
+function applyTheme(){ document.body.setAttribute('data-theme',theme); document.getElementById('themeBtn').textContent = theme==='light'?'🌙 غامق':'☀️ فاتح'; }
+document.getElementById('fontInc').onclick=()=>{ if(fs<28){fs+=2;localStorage.setItem('azkar-fs',fs);applyFs();} };
+document.getElementById('fontDec').onclick=()=>{ if(fs>14){fs-=2;localStorage.setItem('azkar-fs',fs);applyFs();} };
+document.getElementById('fontReset').onclick=()=>{ fs=18;localStorage.setItem('azkar-fs',fs);applyFs(); };
+document.getElementById('themeBtn').onclick=()=>{ theme=theme==='light'?'dark':'light';localStorage.setItem('azkar-theme',theme);applyTheme(); };
+applyFs();applyTheme();render();
+</script>
+</body>
+</html>
